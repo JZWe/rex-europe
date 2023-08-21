@@ -1,0 +1,58 @@
+.age-group-select {
+  display: flex;
+  flex-direction: column;
+  font-size: 0.75rem;
+}
+
+.age-group-select .label {
+  color: #aaaaaa;
+  margin-bottom: 0.3rem;
+}
+
+.age-group-select .selects {
+  display: flex;
+}
+
+.age-group-select .select {
+  appearance: none;
+  background: white;
+  background-image: url('/public/down-arrow.svg');
+  background-size: 12px 12px;
+  background-repeat: no-repeat;
+  background-position: right 0.5rem center;
+  border-radius: 2px;
+  padding: 0.25rem 2rem 0.25rem 0.75rem;
+  outline: none;
+  width: 97px;
+}
+
+.age-group-select .connect {
+  display: flex;
+  align-items: center;
+  background: #f4f6f3;
+  border: 1px solid #8f8f8f;
+  border-left: none;
+  border-right: none;
+  padding: 0.5rem 0.3rem;
+}
+
+.age-group-select .connect {
+  display: flex;
+  align-items: center;
+  background: #f4f6f3;
+  border: 1px solid #8f8f8f;
+  border-left: none;
+  border-right: none;
+  padding: 0.5rem 0.3rem;
+}
+
+.age-group-select .select.error {
+  border-color: #e6998b;
+}
+
+.age-group-select .error-msg {
+  background-color: #fce8e7;
+  color: #e6998b;
+  font-weight: 800;
+  padding: 0.5rem 0.3rem;
+}
