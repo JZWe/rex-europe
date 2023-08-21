@@ -1,0 +1,54 @@
+.price-input-container {
+  display: flex;
+  flex-direction: column;
+  max-width: 600px;
+  font-size: 0.75rem;
+}
+
+.price-input-container label {
+  color: #aaaaaa;
+  font-size: 0.75rem;
+  margin-bottom: 0.3rem;
+}
+
+.price-input-container .currency-price {
+  display: flex;
+}
+
+.price-input-container .currency {
+  display: flex;
+  align-items: center;
+  background: #f4f6f3;
+  border: 1px solid #8f8f8f;
+  border-right: none;
+  border-radius: 2px 0 0 2px;
+  padding: 0.5rem 0.3rem;
+}
+
+.price-input-container .price-input {
+  border: 1px solid #8f8f8f;
+  outline: none;
+  padding: 0.5rem 0.3rem;
+  border-radius: 0 2px 2px 0;
+}
+
+.price-input-container .price-input::placeholder {
+  font-size: 0.75rem;
+}
+
+.price-input-container .price-input.error {
+  border-color: #e6998b;
+}
+
+.price-input-container .error-msg {
+  background-color: #fce8e7;
+  color: #e6998b;
+  font-weight: 800;
+  padding: 0.5rem 0.3rem;
+}
+
+.price-input-container .prompt {
+  margin-left: auto;
+  margin-top: 0.2rem;
+  color: #aaaaaa;
+}
