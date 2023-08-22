@@ -22,7 +22,8 @@ function AgeGroupPriceList({ onChange }) {
           else return item;
         });
         setList(nextList);
-        onChange(nextList);
+
+        onChange(nextList.map((item) => item.data));
       }}
     />
   ));
