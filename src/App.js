@@ -7,8 +7,10 @@ function App() {
   return (
     <div className="app">
       <AgeGroupContextProvider>
-        <AgeGroupPriceList onChange={console.log} />
-        <NewAgeGroupPriceItem />
+        <div className="age-group">
+          <AgeGroupPriceList onChange={console.log} />
+          <NewAgeGroupPriceItem />
+        </div>
       </AgeGroupContextProvider>
     </div>
   );

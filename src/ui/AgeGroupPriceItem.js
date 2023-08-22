@@ -3,17 +3,23 @@ import AgeGroupSelect from './AgeGroupSelect';
 import DeleteAgeGroupPriceItem from './DeleteAgeGroupPriceItem';
 import './AgeGroupPriceItem.css';
 
-function AgeGroupPriceItem({ id, onItemChange }) {
+function AgeGroupPriceItem({ id, num, onItemChange }) {
   return (
     <div className="agegroup-priceitem">
-      <DeleteAgeGroupPriceItem id={id} />
-      <AgeGroupSelect
-        onSelectChange={(ageGroup) => onItemChange({ id, ageGroup })}
-      />
-      <PriceInput
-        id={id}
-        onInputChange={(price) => onItemChange({ id, price })}
-      />
+      <div className="title-delete">
+        <h3>價格設定 - {num}</h3>
+        <DeleteAgeGroupPriceItem id={id} />
+      </div>
+      <div className="select-input">
+        <AgeGroupSelect
+          id={id}
+          onSelectChange={(ageGroup) => onItemChange({ id, ageGroup })}
+        />
+        <PriceInput
+          id={id}
+          onInputChange={(price) => onItemChange({ id, price })}
+        />
+      </div>
     </div>
   );
 }

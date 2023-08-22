@@ -8,6 +8,7 @@ function AgeGroupPriceList({ onChange }) {
     <AgeGroupPriceItem
       key={item.id}
       id={item.id}
+      num={index + 1}
       onItemChange={({ id, ...fields }) => {
         const nextList = list.map((item) => {
           if (item.id === id)
