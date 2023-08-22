@@ -11,7 +11,7 @@ export function AgeGroupContextProvider({ children }) {
     id++;
     setList((prevList) => [
       ...prevList,
-      { id, data: { ageGroup: null, price: null } },
+      { id, data: { ageGroup: null, price: 0 } },
     ]);
   };
 
