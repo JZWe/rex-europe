@@ -2,7 +2,7 @@ import { useState } from 'react';
 import addComma from '../utils/addComma';
 import './PriceInput.css';
 
-function PriceInput() {
+function PriceInput({ onInputChange, id }) {
   const [price, setPrice] = useState('0');
   const error = price.trim() === '' ? '不可以為空白' : null;
 
@@ -42,15 +42,18 @@ function PriceInput() {
     }
 
     setPrice(addComma(priceStr));
+    onInputChange(Number(priceStr));
   };
 
   return (
     <div className="price-input-container">
-      <label for="price-input">入住費用 (每人每晚)</label>
+      <label htmlFor={`price-input-${id}`} className="label">
+        入住費用 (每人每晚)
+      </label>
       <div className="currency-price">
         <div className="currency">NTD</div>
         <input
-          id="price-input"
+          id={`price-input-${id}`}
           className={error ? 'price-input error' : 'price-input'}
           placeholder="請輸入費用"
           onChange={onChange}

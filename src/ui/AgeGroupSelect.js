@@ -1,17 +1,12 @@
-import { useState, useEffect, useMemo } from 'react';
+import { useState } from 'react';
 import './AgeGroupSelect.css';
 
 const MIN = 0;
 const MAX = 20;
 const DIFF = MAX - MIN + 1;
 
-function AgeGroupSelect({ id, onChange }) {
-  const [startAge, setStartAge] = useState('');
-  const [endAge, setEndAge] = useState('');
-  const [hasError, setHasError] = useState(false);
-
-  let disabledResult = useMemo(() => [null, null], []); // [[startAgeStart, startAgeEnd], [endAgeStart, endAgeEnd]]
-
+function getDisabledResult(startAge, endAge) {
+  let disabledResult = [null, null];
   if (startAge || endAge) {
     if (startAge === MIN && endAge === MAX) {
       disabledResult = [null, null];
@@ -26,10 +21,14 @@ function AgeGroupSelect({ id, onChange }) {
       ];
     }
   }
+  return disabledResult;
+}
 
-  useEffect(() => {
-    onChange?.(disabledResult);
-  }, [disabledResult, onChange]);
+function AgeGroupSelect({ id, onSelectChange }) {
+  const [startAge, setStartAge] = useState('');
+  const [endAge, setEndAge] = useState('');
+  const [hasError, setHasError] = useState(false);
+  const disabledResult = getDisabledResult(startAge, endAge);
 
   return (
     <div className="age-group-select">
@@ -40,7 +39,11 @@ function AgeGroupSelect({ id, onChange }) {
           id={`startage-${id}`}
           value={startAge}
           className={hasError ? `select error` : `select`}
-          onChange={(e) => setStartAge(Number(e.target.value))}
+          onChange={(e) => {
+            const nextStartAge = Number(e.target.value);
+            setStartAge(nextStartAge);
+            onSelectChange?.([nextStartAge, endAge === '' ? null : endAge]);
+          }}
         >
           <option value="">-----</option>
           {Array.from({ length: DIFF }, (value, index) => (
@@ -64,7 +67,11 @@ function AgeGroupSelect({ id, onChange }) {
           id={`endage-${id}`}
           value={endAge}
           className={hasError ? `select error` : `select`}
-          onChange={(e) => setEndAge(Number(e.target.value))}
+          onChange={(e) => {
+            const nextEndAge = Number(e.target.value);
+            setEndAge(nextEndAge);
+            onSelectChange?.([startAge === '' ? null : startAge, nextEndAge]);
+          }}
         >
           <option value="">-----</option>
           {Array.from({ length: DIFF }, (value, index) => (
