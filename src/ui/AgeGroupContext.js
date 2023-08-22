@@ -1,4 +1,6 @@
-import { useContext, createContext, useState, useEffect } from 'react';
+import { useContext, createContext, useState } from 'react';
+import getNumberIntervals from '../utils/getNumberIntervals';
+
 let id = 0;
 export const AgeGroupContext = createContext(null);
 
@@ -9,16 +11,24 @@ export function AgeGroupContextProvider({ children }) {
     id++;
     setList((prevList) => [
       ...prevList,
-      { id: id, data: { ageGroup: null, price: null } },
+      { id, data: { ageGroup: null, price: null } },
     ]);
   };
 
   const deleteListItem = (id) =>
     setList((prevList) => prevList.filter((item) => item.id !== id));
 
-  useEffect(() => {
-    console.log(list);
-  }, [list]);
+  const nonEmptyAgeGroups = list
+    .filter((item) => {
+      if (Array.isArray(item.data.ageGroup)) {
+        return item.data.ageGroup.every((groupItem) => groupItem !== null);
+      } else {
+        return item.data.ageGroup !== null;
+      }
+    })
+    .map((item) => item.data.ageGroup);
+
+  const { overlap } = getNumberIntervals(nonEmptyAgeGroups);
 
   return (
     <AgeGroupContext.Provider
@@ -27,6 +37,7 @@ export function AgeGroupContextProvider({ children }) {
         setList,
         addListItem,
         deleteListItem,
+        overlap,
       }}
     >
       {children}

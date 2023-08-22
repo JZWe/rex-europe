@@ -1,5 +1,9 @@
+export const MIN = 0;
+export const MAX = 20;
+export const DIFF = MAX - MIN + 1;
+
 function getNumberIntervals(intervals = []) {
-  const zeroToTwenty = Array.from({ length: 21 }, (num, index) => []);
+  const zeroToTwenty = Array.from({ length: DIFF }, (num, index) => []);
   let index = 0;
 
   if (!Array.isArray(intervals)) {

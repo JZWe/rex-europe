@@ -1,9 +1,7 @@
 import { useState } from 'react';
 import './AgeGroupSelect.css';
-
-const MIN = 0;
-const MAX = 20;
-const DIFF = MAX - MIN + 1;
+import { MIN, MAX, DIFF } from '../utils/getNumberIntervals';
+import { useAgeGroup } from './AgeGroupContext';
 
 function getDisabledResult(startAge, endAge) {
   let disabledResult = [null, null];
@@ -27,8 +25,11 @@ function getDisabledResult(startAge, endAge) {
 function AgeGroupSelect({ id, onSelectChange }) {
   const [startAge, setStartAge] = useState('');
   const [endAge, setEndAge] = useState('');
-  const [hasError, setHasError] = useState(false);
   const disabledResult = getDisabledResult(startAge, endAge);
+  const { overlap } = useAgeGroup();
+  const hasError = overlap.some((lapItem) =>
+    lapItem.find((age) => startAge === age || endAge === age)
+  );
 
   return (
     <div className="age-group-select">
@@ -90,7 +91,6 @@ function AgeGroupSelect({ id, onSelectChange }) {
           ))}
         </select>
       </div>
-
       {hasError ? <span className="error-msg">年齡區間不可重疊</span> : null}
     </div>
   );
