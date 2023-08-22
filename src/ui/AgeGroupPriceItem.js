@@ -20,6 +20,7 @@ function AgeGroupPriceItem({ id, num, onItemChange }) {
           onInputChange={(price) => onItemChange({ id, price })}
         />
       </div>
+      <hr />
     </div>
   );
 }

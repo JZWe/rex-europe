@@ -11,6 +11,11 @@
   padding: 0;
 }
 
+.new-btn:disabled {
+  color: grey;
+  cursor: not-allowed;
+}
+
 .new-btn svg {
   height: 20px;
   width: 20px;
