@@ -1,20 +1,22 @@
-import { useEffect } from 'react';
 import AgeGroupPriceItem from './AgeGroupPriceItem';
 import { useAgeGroup } from './AgeGroupContext';
 
 function AgeGroupPriceList({ onChange }) {
   const { list, setList } = useAgeGroup();
 
-  return list.map((_, index) => (
+  return list.map((item, index) => (
     <AgeGroupPriceItem
-      key={index}
-      id={index}
+      key={item.id}
+      id={item.id}
       onItemChange={({ id, ...fields }) => {
-        const nextList = list.map((item, innerIndex) => {
-          if (innerIndex === id)
+        const nextList = list.map((item) => {
+          if (item.id === id)
             return {
-              ...item,
-              ...fields,
+              id: item.id,
+              data: {
+                ...item.data,
+                ...fields,
+              },
             };
           else return item;
         });

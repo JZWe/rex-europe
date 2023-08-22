@@ -1,11 +1,24 @@
-import { useContext, createContext, useState } from 'react';
-
+import { useContext, createContext, useState, useEffect } from 'react';
+let id = 0;
 export const AgeGroupContext = createContext(null);
 
 export function AgeGroupContextProvider({ children }) {
-  const [list, setList] = useState([]); // [{ ageGroup: Array<number>, price: number }]
-  const addListItem = () =>
-    setList((prevList) => [...prevList, { ageGroup: null, price: null }]);
+  const [list, setList] = useState([]); // [{ id: number, data: { ageGroup: Array<number>, price: number  }}]
+
+  const addListItem = () => {
+    id++;
+    setList((prevList) => [
+      ...prevList,
+      { id: id, data: { ageGroup: null, price: null } },
+    ]);
+  };
+
+  const deleteListItem = (id) =>
+    setList((prevList) => prevList.filter((item) => item.id !== id));
+
+  useEffect(() => {
+    console.log(list);
+  }, [list]);
 
   return (
     <AgeGroupContext.Provider
@@ -13,6 +26,7 @@ export function AgeGroupContextProvider({ children }) {
         list,
         setList,
         addListItem,
+        deleteListItem,
       }}
     >
       {children}
